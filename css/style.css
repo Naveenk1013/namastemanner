@@ -311,7 +311,7 @@ p {
   background: linear-gradient(135deg, #f8fafcea 0%, #e2e8f0e8 100%);
   position: relative;
   overflow: hidden;
-      background: url('/assets/hero.png') no-repeat center;
+      background: url('../assets/hero.png') no-repeat center;
     background-size: contain;
 }
 
@@ -568,7 +568,7 @@ p {
   overflow: hidden;
       background: 
         linear-gradient(rgba(255, 255, 255, 0.445), rgba(166, 167, 230, 0.637)), 
-        url('/assets/card.png') no-repeat center;
+        url('../assets/card.png') no-repeat center;
         
     /* Keep your existing background-size property */
     background-size: contain;
@@ -696,7 +696,7 @@ p {
      */
     background: 
         linear-gradient(rgb(173, 216, 230), rgba(173, 216, 230, 0.4)), /* Light blue tint, 40% opacity */
-        url('/assets/service.png') no-repeat center left; /* Your original image */
+        url('../assets/service.png') no-repeat center left; /* Your original image */
     
     background-size: 
         cover, /* For the gradient layer (optional, but good practice) */
@@ -781,7 +781,7 @@ p {
 .contact {
   padding: var(--section-padding);
   
-   background: url("/assets/contact.png") no-repeat center center/cover;
+   background: url("../assets/contact.png") no-repeat center center/cover;
 
 }
 
@@ -1245,5 +1245,6 @@ p {
 .floating-social .btn:hover {
     transform: scale(1.1); /* Slightly enlarge on hover */
 }
+
 
 
