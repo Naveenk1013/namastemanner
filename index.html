@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namaste Manner | Professional Etiquette & Soft Skills Training</title>
+    <meta name="description" content="Elevate your workforce with professional etiquette and soft skills training tailored for blue-collar workers and organizations.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJzL3HzJqJ3N76/TTRpDkYQyK33fWCAyTjKqSgyaLz1zH1g5JzV8J5j5I5I5I==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+  <!-- AOS CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <!-- Swiper CSS (optional) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+ 
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+    <!-- Header Section -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <!-- Logo -->
+                <div class="logo">
+                    <h2>Namaste Manner</h2>
+                </div>
+                
+                <!-- Navigation Menu -->
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#services" class="nav-link">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#process" class="nav-link">Process</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+                
+                <!-- Mobile Menu Toggle -->
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+<!-- Loading Screen -->
+<div id="loading-screen">
+    <video id="loading-video" autoplay muted playsinline>
+        <source src="loading.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="loader-overlay">LOADING</div>
+</div>
+
+<svg style="display: none;">
+    <filter id="warp-filter">
+        <feTurbulence type="fractalNoise" baseFrequency="0 0" numOctaves="3" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" id="disp-map" />
+    </filter>
+</svg>
+
+<div id="main-content" style="display: none;">
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const loadingScreen = document.getElementById('loading-screen');
+        const loadingVideo = document.getElementById('loading-video');
+        const mainContent = document.getElementById('main-content');
+        const dispMap = document.getElementById('disp-map');
+
+        // Function to animate the SVG filter properties for a fluid warp
+        const animateWarp = () => {
+            // Animate the scale of the displacement map from 0 to a high value
+            let scale = 0;
+            const duration = 1500; // 1.5s
+            const startTime = performance.now();
+
+            const step = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(1, elapsed / duration);
+                
+                // Use an easing function (e.g., cubic-bezier) for a smooth pulse/warp
+                // This makes the warp effect feel more dynamic
+                scale = Math.sin(progress * Math.PI) * 100; // Peaks at 50%
+                dispMap.setAttribute('scale', scale);
+
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    // Warp effect ends, start the full-screen fade-out
+                    loadingScreen.classList.add('fade-out');
+
+                    // Set a timeout to remove the loading screen after the fade-out transition is complete
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 1000); // Matches the CSS transition time
+                }
+            };
+            requestAnimationFrame(step);
+        };
+
+        // Wait for the entire page (video, images, content) to load
+        window.addEventListener('load', () => {
+            // 1. Hide the video's overlay text/spinner immediately
+            document.querySelector('.loader-overlay').style.display = 'none';
+
+            // 2. Start the main SVG warp animation
+            animateWarp();
+            
+            // 3. Make the main content visible before the screen fades out
+            mainContent.style.display = 'block'; 
+        });
+    });
+</script>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Elevate Your Workforce with Professional Etiquette</h1>
+
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Get Started</a>
+                    <a href="#services" class="btn btn-secondary">Our Services</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-card card-1">
+                    <span>Professional Communication</span>
+                </div>
+                <div class="floating-card card-2">
+                    <span>Workplace Etiquette</span>
+                </div>
+                <div class="floating-card card-3">
+                    <span>Customer Service Excellence</span>
+                </div>
+               
+
+            </div>
+            <div class="transparent-container">
+                <p class="hero-subtitle">
+    Customized soft skills training programs designed specifically for blue-collar workers to enhance professionalism and workplace performance.</p>
+</div>
+        </div>
+
+        
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Namaste Manner?</h2>
+                <p class="section-subtitle">We specialize in transforming workforce behavior through targeted etiquette training</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Professional Development for Blue-Collar Excellence</h3>
+                    <p>At Namaste Manner, we understand that a company's frontline workers are often the first point of contact with customers. Their behavior, communication, and professionalism directly impact your brand reputation.</p>
+                    <p>Our specialized training programs are designed to equip blue-collar workers with the soft skills needed to excel in their roles, enhance customer interactions, and contribute positively to your organizational culture.</p>
+                    
+                    <div class="stats-container">
+                        <div class="stat">
+                            <span class="stat-number" data-count="95">0</span>
+                            <span class="stat-label">Client Satisfaction</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-count="150">0</span>
+                            <span class="stat-label">Companies Served</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-count="10000">0</span>
+                            <span class="stat-label">Workers Trained</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-visual">
+                    <div class="visual-card">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 01-.233.96 10.088 10.088 0 005.06-1.01.75.75 0 00.42-.643 4.875 4.875 0 00-6.957-4.611 8.586 8.586 0 011.71 5.157v.003z" />
+                            </svg>
+                        </div>
+                        <h4>Workforce-Focused</h4>
+                        <p>Specialized training designed specifically for blue-collar professionals</p>
+                    </div>
+                    
+                    
+                    <div class="visual-card">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <h4>Custom Solutions</h4>
+                        <p>Tailored curriculum to match your organization's specific needs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">Comprehensive soft skills training solutions for organizational excellence</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M4.913 2.658c2.075-.27 4.19-.408 6.337-.408 2.147 0 4.262.139 6.337.408 1.922.25 3.291 1.861 3.405 3.727a4.403 4.403 0 00-1.032-.211 50.89 50.89 0 00-8.42 0c-2.358.196-4.04 2.19-4.04 4.434v4.286a4.47 4.47 0 002.433 3.984L7.28 21.53A.75.75 0 016 21v-4.03a48.527 48.527 0 01-1.087-.128C2.905 16.58 1.5 14.833 1.5 12.862V6.638c0-1.97 1.405-3.718 3.413-3.979z" />
+                            <path d="M15.75 7.5c-1.376 0-2.739.057-4.086.169C10.124 7.797 9 9.103 9 10.609v4.285c0 1.507 1.128 2.814 2.67 2.94 1.243.102 2.5.157 3.768.165l2.782 2.781a.75.75 0 001.28-.53v-2.39l.33-.026c1.542-.125 2.67-1.433 2.67-2.94v-4.286c0-1.505-1.125-2.811-2.664-2.94A49.392 49.392 0 0015.75 7.5z" />
+                        </svg>
+                    </div>
+                    <h3>Professional Communication</h3>
+                    <p>Enhance verbal and non-verbal communication skills for effective workplace interactions and customer relations.</p>
+                    <ul>
+                        <li>Active listening techniques</li>
+                        <li>Clear and concise messaging</li>
+                        <li>Professional telephone etiquette</li>
+                        <li>Cross-cultural communication</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <h3>Workplace Etiquette</h3>
+                    <p>Develop professional behavior standards that create a positive and respectful work environment.</p>
+                    <ul>
+                        <li>Professional appearance standards</li>
+                        <li>Respectful workplace conduct</li>
+                        <li>Meeting and greeting protocols</li>
+                        <li>Conflict resolution strategies</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0112 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 01-3.476.383.39.39 0 00-.297.17l-2.755 4.133a.75.75 0 01-1.248 0l-2.755-4.133a.39.39 0 00-.297-.17 48.9 48.9 0 01-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97zM6.75 8.25a.75.75 0 01.75-.75h9a.75.75 0 010 1.5h-9a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H7.5z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <h3>Customer Service Excellence</h3>
+                    <p>Train your staff to deliver exceptional customer experiences that build loyalty and enhance reputation.</p>
+                    <ul>
+                        <li>Customer interaction protocols</li>
+                        <li>Problem-solving techniques</li>
+                        <li>Service recovery strategies</li>
+                        <li>Building customer rapport</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="services-cta">
+                <h3>Custom Curriculum Development</h3>
+                <p>We develop tailored training programs specifically designed for your industry, company culture, and workforce needs.</p>
+                <a href="#contact" class="btn btn-primary">Request Custom Solution</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+     
+    <section id="process" class="process">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Process</h2>
+                <p class="section-subtitle">A structured approach to transforming your workforce</p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Needs Assessment</h3>
+                        <p>We begin by understanding your organization's specific challenges, culture, and training objectives through detailed consultations.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Custom Curriculum Design</h3>
+                        <p>Our experts develop a tailored training program that addresses your unique requirements and workforce composition.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Interactive Training Sessions</h3>
+                        <p>We deliver engaging, practical training sessions that focus on real-world scenarios and hands-on learning.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Implementation Support</h3>
+                        <p>We provide ongoing support and resources to help your team apply their new skills effectively in daily operations.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Evaluation & Follow-up</h3>
+                        <p>We measure training effectiveness and provide follow-up sessions to ensure lasting behavioral change.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Ready to elevate your workforce? Contact us for a consultation</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Let's Start a Conversation</h3>
+                    <p>We'd love to discuss how our training programs can benefit your organization and workforce.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Phone</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
+                                    <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>info@namastemanner.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">How can we help you?</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Namaste Manner</h3>
+                    <p>Professional etiquette and soft skills training for organizational excellence.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#process">Process</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Professional Communication</a></li>
+                        <li><a href="#services">Workplace Etiquette</a></li>
+                        <li><a href="#services">Customer Service Excellence</a></li>
+                        <li><a href="#services">Custom Curriculum</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.016 10.016 0 01-3.127 1.184 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Namaste Manner. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/gsap.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <div class="floating-social">
+  <a href="https://wa.me/7766089575" target="_blank" class="btn btn-success shadow rounded-circle mb-2" title="WhatsApp">
+    <i class="fab fa-whatsapp fa-lg"></i>
+  </a>
+  <a href="https://www.instagram.com/namsteymanners" target="_blank" class="btn btn-danger shadow rounded-circle" title="Instagram" style="background: linear-gradient(45deg,#fd5949,#d6249f,#285AEB); border: none;">
+    <i class="fab fa-instagram fa-lg"></i>
+  </a>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loading Screen with Warp Effect</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="loading-screen">
+        <video id="loading-video" autoplay muted playsinline>
+            <source src="loading.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="loader-overlay">Loading...</div>
+    </div>
+
+    <svg id="svg-filters" style="display: none;">
+      <filter id="warp">
+        <feTurbulence type="fractalNoise" baseFrequency="0 0" numOctaves="3" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
+
+    <div id="main-content" class="hidden">
+        <h1>Welcome to the Site!</h1>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

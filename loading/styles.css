@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    overflow: hidden; /* Prevent scrolling while loading */
+    background-color: #000;
+}
+
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    z-index: 9999; /* Ensure it covers everything */
+    transition: opacity 1s ease-in-out; /* For fade out */
+}
+
+#loading-screen.fade-out {
+    opacity: 0;
+    pointer-events: none; /* Allows interaction with content underneath */
+}
+
+#loading-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures video covers the screen */
+    /* This is the key line to apply the filter for the warp effect */
+    filter: url(#warp);
+    /* Animation for the warp transition */
+    animation: warp-in 1.5s ease-out forwards;
+    animation-play-state: paused; /* Start paused, will be played by JS */
+}
+
+/* Define the warp effect animation */
+@keyframes warp-in {
+    0% {
+        filter: url(#warp);
+    }
+    50% {
+        /* Animate the scale of the displacement map for a strong warp */
+        filter: url(#warp-active);
+    }
+    100% {
+        /* Reset or transition to a light blur/scale effect */
+        filter: blur(50px) scale(1.5); /* Or a final reset with no filter */
+    }
+}
+
+/* Create an active state for the SVG filter animation */
+#svg-filters #warp-active {
+    /* Define the filter with a high scale for the displacement effect */
+    filter: url(#warp); /* Using the same ID but applying the animation will override the scale */
+}
+
+/* Optional overlay for text/spinner */
+.loader-overlay {
+    position: absolute;
+    color: white;
+    font-size: 2em;
+    font-family: sans-serif;
+}
+
+#main-content.hidden {
+    display: none;
+}

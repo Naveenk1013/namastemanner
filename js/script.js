@@ -1,0 +1,622 @@
+// Namaste Manner - Professional Landing Page JavaScript
+// This file handles animations, interactions, and dynamic functionality
+
+// Wait for the DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all functionality
+    initApp();
+});
+
+/**
+ * Main initialization function
+ */
+function initApp() {
+    console.log('🚀 Initializing Namaste Manner Website...');
+    
+    // Initialize mobile navigation
+    initMobileNav();
+    
+    // Initialize smooth scrolling for navigation links
+    initSmoothScrolling();
+    
+    // Initialize GSAP animations
+    initAnimations();
+    
+    // Initialize counter animations
+    initCounters();
+    
+    // Initialize form handling
+    initFormHandler();
+    
+    // Initialize scroll effects
+    initScrollEffects();
+    
+    // Initialize floating card animations
+    initFloatingCards();
+    
+    // Initialize service card interactions
+    initServiceCardInteractions();
+    
+    // Initialize lazy loading
+    initLazyLoading();
+    
+    console.log('✅ Namaste Manner Website initialized successfully!');
+}
+
+/**
+ * Mobile Navigation Toggle
+ */
+function initMobileNav() {
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    if (!hamburger || !navMenu) return;
+    
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        
+        // Toggle body scroll when menu is open
+        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+    });
+    
+    // Close mobile menu when clicking on a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const isClickInsideNav = navMenu.contains(event.target) || hamburger.contains(event.target);
+        
+        if (!isClickInsideNav && navMenu.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}
+
+/**
+ * Smooth Scrolling for Navigation Links
+ */
+function initSmoothScrolling() {
+    const navLinks = document.querySelectorAll('a[href^="#"]');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const targetPosition = targetElement.offsetTop - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+/**
+ * GSAP Animations Initialization
+ */
+function initAnimations() {
+    // Check if GSAP is loaded
+    if (typeof gsap === 'undefined') {
+        console.warn('GSAP not loaded. Animations will not work.');
+        return;
+    }
+    
+    // Register GSAP plugins if available
+    if (typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+    }
+    
+    // Hero section animations
+    animateHeroSection();
+    
+    // About section animations
+    animateAboutSection();
+    
+    // Services section animations
+    animateServicesSection();
+    
+    // Process section animations
+    animateProcessSection();
+    
+    // Contact section animations
+    animateContactSection();
+}
+
+/**
+ * Hero Section Animations
+ */
+function animateHeroSection() {
+    const heroContent = document.querySelector('.hero-content');
+    const heroVisual = document.querySelector('.hero-visual');
+    const heroButtons = document.querySelector('.hero-buttons');
+    
+    if (heroContent && typeof gsap !== 'undefined') {
+        // Create timeline for hero section
+        const heroTimeline = gsap.timeline();
+        
+        heroTimeline
+            .from(heroContent, {
+                duration: 1,
+                y: 50,
+                opacity: 0,
+                ease: 'power3.out'
+            })
+            .from(heroVisual, {
+                duration: 1,
+                x: 50,
+                opacity: 0,
+                ease: 'power3.out'
+            }, '-=0.5')
+            .from(heroButtons, {
+                duration: 0.8,
+                y: 30,
+                opacity: 0,
+                ease: 'power3.out'
+            }, '-=0.3');
+    }
+}
+
+/**
+ * About Section Animations
+ */
+function animateAboutSection() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    
+    const aboutSection = document.querySelector('.about');
+    
+    if (aboutSection) {
+        gsap.from('.about-text', {
+            scrollTrigger: {
+                trigger: '.about',
+                start: 'top 80%',
+                end: 'bottom 20%',
+                toggleActions: 'play none none reverse'
+            },
+            duration: 1,
+            x: -50,
+            opacity: 0,
+            ease: 'power3.out'
+        });
+        
+        gsap.from('.about-visual', {
+            scrollTrigger: {
+                trigger: '.about',
+                start: 'top 80%',
+                end: 'bottom 20%',
+                toggleActions: 'play none none reverse'
+            },
+            duration: 1,
+            x: 50,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.3
+        });
+    }
+}
+
+/**
+ * Services Section Animations
+ */
+function animateServicesSection() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    serviceCards.forEach((card, index) => {
+        gsap.from(card, {
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 85%',
+                end: 'bottom 20%',
+                toggleActions: 'play none none reverse'
+            },
+            duration: 0.8,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: index * 0.2
+        });
+    });
+    
+    // Services CTA animation
+    gsap.from('.services-cta', {
+        scrollTrigger: {
+            trigger: '.services-cta',
+            start: 'top 85%',
+            end: 'bottom 20%',
+            toggleActions: 'play none none reverse'
+        },
+        duration: 1,
+        scale: 0.9,
+        opacity: 0,
+        ease: 'power3.out'
+    });
+}
+
+/**
+ * Process Section Animations
+ */
+function animateProcessSection() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    
+    const processSteps = document.querySelectorAll('.process-step');
+    
+    processSteps.forEach((step, index) => {
+        gsap.from(step, {
+            scrollTrigger: {
+                trigger: step,
+                start: 'top 85%',
+                end: 'bottom 20%',
+                toggleActions: 'play none none reverse'
+            },
+            duration: 0.8,
+            x: index % 2 === 0 ? -30 : 30,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: index * 0.15
+        });
+    });
+}
+
+/**
+ * Contact Section Animations
+ */
+function animateContactSection() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    
+    gsap.from('.contact-info', {
+        scrollTrigger: {
+            trigger: '.contact',
+            start: 'top 80%',
+            end: 'bottom 20%',
+            toggleActions: 'play none none reverse'
+        },
+        duration: 1,
+        x: -50,
+        opacity: 0,
+        ease: 'power3.out'
+    });
+    
+    gsap.from('.contact-form', {
+        scrollTrigger: {
+            trigger: '.contact',
+            start: 'top 80%',
+            end: 'bottom 20%',
+            toggleActions: 'play none none reverse'
+        },
+        duration: 1,
+        x: 50,
+        opacity: 0,
+        ease: 'power3.out',
+        delay: 0.3
+    });
+}
+
+/**
+ * Animated Number Counters
+ */
+function initCounters() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    statNumbers.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-count'));
+        const duration = 2000; // 2 seconds
+        const step = target / (duration / 16); // 60fps
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    let current = 0;
+                    
+                    const timer = setInterval(() => {
+                        current += step;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        stat.textContent = Math.floor(current).toLocaleString();
+                    }, 16);
+                    
+                    observer.unobserve(stat);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(stat);
+    });
+}
+
+/**
+ * Form Submission Handler
+ */
+function initFormHandler() {
+    const contactForm = document.getElementById('contactForm');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const formDataObj = Object.fromEntries(formData.entries());
+            
+            // Validate form
+            if (!validateForm(formDataObj)) {
+                return;
+            }
+            
+            // Show loading state
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.innerHTML = '<span class="loading"></span> Sending...';
+            submitButton.disabled = true;
+            
+            // Simulate form submission (replace with actual API call)
+            setTimeout(() => {
+                // Reset button
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                
+                // Show success message
+                showFormMessage('Thank you for your message! We will get back to you soon.', 'success');
+                
+                // Reset form
+                this.reset();
+            }, 2000);
+        });
+    }
+}
+
+/**
+ * Form Validation
+ */
+function validateForm(formData) {
+    // Basic validation
+    if (!formData.name || formData.name.trim().length < 2) {
+        showFormMessage('Please enter your full name.', 'error');
+        return false;
+    }
+    
+    if (!formData.email || !isValidEmail(formData.email)) {
+        showFormMessage('Please enter a valid email address.', 'error');
+        return false;
+    }
+    
+    if (!formData.company || formData.company.trim().length < 2) {
+        showFormMessage('Please enter your company name.', 'error');
+        return false;
+    }
+    
+    if (!formData.message || formData.message.trim().length < 10) {
+        showFormMessage('Please enter a message with at least 10 characters.', 'error');
+        return false;
+    }
+    
+    return true;
+}
+
+/**
+ * Email Validation Helper
+ */
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+/**
+ * Show Form Success/Error Message
+ */
+function showFormMessage(message, type) {
+    // Remove existing messages
+    const existingMessage = document.querySelector('.form-success, .form-error');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+    
+    // Create new message element
+    const messageEl = document.createElement('div');
+    messageEl.className = type === 'success' ? 'form-success' : 'form-error';
+    messageEl.textContent = message;
+    
+    // Insert after form
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.parentNode.insertBefore(messageEl, contactForm.nextSibling);
+        
+        // Remove message after 5 seconds
+        setTimeout(() => {
+            if (messageEl.parentNode) {
+                messageEl.remove();
+            }
+        }, 5000);
+    }
+}
+
+/**
+ * Scroll Effects (Header background, etc.)
+ */
+function initScrollEffects() {
+    const header = document.querySelector('.header');
+    
+    if (header) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    }
+    
+    // Add active class to navigation links based on scroll position
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    if (sections.length > 0 && navLinks.length > 0) {
+        window.addEventListener('scroll', function() {
+            let current = '';
+            const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= (sectionTop - headerHeight - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    }
+}
+
+/**
+ * Enhanced Floating Card Animations
+ */
+function initFloatingCards() {
+    const floatingCards = document.querySelectorAll('.floating-card');
+    
+    if (floatingCards.length === 0 || typeof gsap === 'undefined') return;
+    
+    // Continuous floating animation
+    floatingCards.forEach((card, index) => {
+        gsap.to(card, {
+            y: -20,
+            duration: 2,
+            repeat: -1,
+            yoyo: true,
+            ease: 'power1.inOut',
+            delay: index * 0.3
+        });
+    });
+    
+    // Add mouse move parallax effect
+    document.addEventListener('mousemove', function(e) {
+        const mouseX = e.clientX / window.innerWidth;
+        const mouseY = e.clientY / window.innerHeight;
+        
+        floatingCards.forEach((card, index) => {
+            const speed = 0.5 + (index * 0.1);
+            const x = (mouseX - 0.5) * 20 * speed;
+            const y = (mouseY - 0.5) * 20 * speed;
+            
+            gsap.to(card, {
+                x: x,
+                y: y,
+                duration: 1,
+                ease: 'power2.out'
+            });
+        });
+    });
+}
+
+/**
+ * Service Card Interactive Effects
+ */
+function initServiceCardInteractions() {
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    serviceCards.forEach(card => {
+        // Add hover effects
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+}
+
+/**
+ * Performance Optimization - Lazy loading for images
+ */
+function initLazyLoading() {
+    const images = document.querySelectorAll('img[data-src]');
+    
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.getAttribute('data-src');
+                    img.classList.remove('lazy');
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+        
+        images.forEach(img => imageObserver.observe(img));
+    } else {
+        // Fallback for older browsers
+        images.forEach(img => {
+            img.src = img.getAttribute('data-src');
+        });
+    }
+}
+
+/**
+ * Handle page visibility changes for performance
+ */
+document.addEventListener('visibilitychange', function() {
+    if (typeof gsap !== 'undefined') {
+        if (document.hidden) {
+            // Pause animations when page is not visible
+            gsap.globalTimeline.pause();
+        } else {
+            // Resume animations when page becomes visible
+            gsap.globalTimeline.resume();
+        }
+    }
+});
+
+/**
+ * Error handling for failed resource loading
+ */
+window.addEventListener('error', function(e) {
+    if (e.target.tagName === 'SCRIPT' && e.target.src.includes('gsap')) {
+        console.warn('GSAP failed to load. Falling back to basic animations.');
+        // Fallback: Add basic CSS animations
+        document.body.classList.add('no-gsap');
+    }
+});
+
+// Export functions for potential module use
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        initApp,
+        initMobileNav,
+        initSmoothScrolling,
+        initAnimations
+    };
+}
+
+// JS to hide loader after page loads
+window.addEventListener("load", () => {
+  document.body.classList.add("loaded");
+});
+
